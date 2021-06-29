@@ -197,11 +197,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="canvas.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="matrix.h" />
     <ClInclude Include="tuple.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="canvas.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="math.cpp" />

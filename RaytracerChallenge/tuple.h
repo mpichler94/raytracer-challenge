@@ -22,7 +22,7 @@ public:
 
 	void normalize();
 
-	Tuple operator-();
+	Tuple operator-() const ;
 
 
 	friend bool operator==(const Tuple& lhs, const Tuple& rhs);

@@ -1,6 +1,9 @@
-#include "tuple.h"
 #include <iostream>
 #include <iomanip>
+#include <fstream>
+#include "tuple.h"
+#include "canvas.h"
+#include "color.h"
 
 struct projectile
 {
@@ -25,17 +28,21 @@ int main(char* ars[])
 {
 	// projectile starts one unit above the origin.
 	// velocity is normalized to 1 unit / tick.
-	auto p = projectile(Tuple::point(0, 1, 0), normalize(Tuple::vector(1, 1, 0)) * 5.f);
+	auto p = projectile(Tuple::point(0, 1, 0), normalize(Tuple::vector(1, 1.8, 0)) * 11.25f);
 
 	// gravity -0.1 unit / tick, and wind is -0.01 unit / tick.
 	auto e = environment(Tuple::vector(0, -0.1, 0), Tuple::vector(-0.01, 0, 0));
-	
+
+	auto canvas = Canvas(900, 550);
+
 	int count = 0;
 	while (p.position.y >= 0.f)
 	{
 		std::cout << std::fixed << std::setprecision(2);
 		std::cout << "Projectile at (" << std::setw(7) << p.position.x << " " << std::setw(7) << p.position.y << " " << std::setw(7) << p.position.z;
 		std::cout << ") with velocity (" << std::setw(7) << p.velocity.x << " " << std::setw(7) << p.velocity.y << " " << std::setw(7) << p.velocity.z << ")" << std::endl;
+		canvas.writePixel((int)p.position.x, canvas.height - (int)p.position.y, Color(1, 0, 0));
+
 		p = tick(e, p);
 		count++;
 
@@ -46,4 +53,7 @@ int main(char* ars[])
 	std::cout << "Projectile at (" << std::setw(7) << p.position.x << " " << std::setw(7) << p.position.y << " " << std::setw(7) << p.position.z;
 	std::cout << ") with velocity (" << std::setw(7) << p.velocity.x << " " << std::setw(7) << p.velocity.y << " " << std::setw(7) << p.velocity.z << ")" << std::endl;
 	std::cout << "Projectile hit ground after " << count << " ticks." << std::endl;
+	canvas.writePixel((int)p.position.x, canvas.height - (int)p.position.y, Color(1, 0, 0));
+
+	canvas.savePPM("canvas.ppm");
 }

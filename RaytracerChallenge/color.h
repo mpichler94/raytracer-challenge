@@ -13,11 +13,14 @@ public:
 	Color() = default;
 	Color(float r, float g, float b);
 
+	Color& operator=(const Color& c);
+
 	friend bool operator==(const Color& lhs, const Color& rhs);
 
 	friend const Color operator+(const Color& a, const Color& b);
 	friend const Color operator-(const Color& a, const Color& b);
 
+	friend const Color operator*(const Color& a, const Color& b);
 	friend const Color operator*(const Color& c, const float f);
 
 	friend std::wstring ToString(const Color& c);
