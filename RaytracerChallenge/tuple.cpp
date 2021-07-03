@@ -1,6 +1,7 @@
+#include <sstream>
+#include <iomanip>
 #include "tuple.h"
 #include "math.h"
-#include <format>
 
 Tuple::Tuple(float x, float y, float z, float w)
 	: x(x), y(y), z(z), w(w)
@@ -48,10 +49,7 @@ Tuple Tuple::operator-() const
 
 bool operator==(const Tuple& lhs, const Tuple& rhs)
 {
-	if (!areEqual(lhs.x, rhs.x) || !areEqual(lhs.y, rhs.y) || !areEqual(lhs.z, rhs.z) || !areEqual(lhs.w, rhs.w))
-		return false;
-
-	return true;
+	return areEqual(lhs.x, rhs.x) && areEqual(lhs.y, rhs.y) && areEqual(lhs.z, rhs.z) && areEqual(lhs.w, rhs.w);
 }
 
 const Tuple operator+(const Tuple& lhs, const Tuple& rhs)
@@ -101,7 +99,21 @@ Tuple cross(const Tuple& a, const Tuple& b)
 
 std::wstring ToString(const Tuple& tuple)
 {
-	return std::format(L"%s(%.5f, %.5f, %.5)f", tuple.isPoint() ? L"Point" : L"Tuple", tuple.x, tuple.y, tuple.z);
+	std::wstringstream ss;
+	ss << std::fixed << std::setprecision(5);
+	if (tuple.isPoint())
+		ss << "Point";
+	else if (tuple.isVector())
+		ss << "Vector";
+	else
+		ss << "Tuple";
+
+	ss << "(" << tuple.x << " " << tuple.y << " " << tuple.z;
+	if (!tuple.isVector() && !tuple.isPoint())
+		ss << ", " << tuple.w;
+	ss << ")" << std::endl;
+
+	return ss.str();
 }
 
 bool areEqual(const Tuple& lhs, const Tuple& rhs)

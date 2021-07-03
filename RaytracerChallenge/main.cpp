@@ -4,6 +4,7 @@
 #include "tuple.h"
 #include "canvas.h"
 #include "color.h"
+#include "math.h"
 
 struct projectile
 {
@@ -24,7 +25,7 @@ projectile tick(environment env, projectile proj)
 	return projectile(pos, vel);
 }
 
-int main(char* ars[])
+void projectileLaucher()
 {
 	// projectile starts one unit above the origin.
 	// velocity is normalized to 1 unit / tick.
@@ -56,4 +57,27 @@ int main(char* ars[])
 	canvas.writePixel((int)p.position.x, canvas.height - (int)p.position.y, Color(1, 0, 0));
 
 	canvas.savePPM("canvas.ppm");
+}
+
+void analogClock()
+{
+	auto canvas = Canvas(50, 50);
+
+	for (int i = 0; i < 12; i++)
+	{
+		auto p = Tuple::point(0, 0, 0);
+		auto t = translation(0, 20, 0);
+		auto r = rotationZ((float)i * pi / 6);
+		auto t2 = translation(22, 22, 0);
+		p = t2 * r * t * p;
+		canvas.writePixel(p.x, p.y, Color(1, 1, 1));
+	}
+	canvas.savePPM("canvas.ppm");
+}
+
+int main(char* ars[])
+{
+	//projectileLaucher();
+	analogClock();
+
 }
