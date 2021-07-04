@@ -5,9 +5,7 @@ VisualStudioVersion = 17.0.31410.414
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RaytracerChallenge", "RaytracerChallenge\RaytracerChallenge.vcxproj", "{39DDAC89-C27E-43C1-A231-46401A0EFD70}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OldTests", "Tests\Tests.vcxproj", "{0464391D-0BC1-4C49-BE21-D733A4A8262A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GoogleTests", "GoogleTests\GoogleTests.vcxproj", "{FD158D25-3F38-41B1-AF54-628EC8404002}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{0464391D-0BC1-4C49-BE21-D733A4A8262A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,18 +41,6 @@ Global
 		{0464391D-0BC1-4C49-BE21-D733A4A8262A}.Test|x64.Build.0 = Test|x64
 		{0464391D-0BC1-4C49-BE21-D733A4A8262A}.Test|x86.ActiveCfg = Test|Win32
 		{0464391D-0BC1-4C49-BE21-D733A4A8262A}.Test|x86.Build.0 = Test|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Debug|x64.ActiveCfg = Debug|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Debug|x64.Build.0 = Debug|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Debug|x86.ActiveCfg = Debug|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Debug|x86.Build.0 = Debug|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Release|x64.ActiveCfg = Release|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Release|x64.Build.0 = Release|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Release|x86.ActiveCfg = Release|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Release|x86.Build.0 = Release|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Test|x64.ActiveCfg = Test|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Test|x64.Build.0 = Test|x64
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Test|x86.ActiveCfg = Test|Win32
-		{FD158D25-3F38-41B1-AF54-628EC8404002}.Test|x86.Build.0 = Test|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

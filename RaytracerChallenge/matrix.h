@@ -80,6 +80,10 @@ public:
 
 	bool isInvertible() const;
 
+	Matrix<4, 4>& operator=(const Matrix<4, 4>& other);
+	Matrix<4, 4>& operator=(Matrix<4, 4>&& other);
+
+
 	static Matrix fromRows(const Tuple& r1, const Tuple& r2, const Tuple& r3, const Tuple& r4);
 	static Matrix fromCols(const Tuple& c1, const Tuple& c2, const Tuple& c3, const Tuple& c4);
 

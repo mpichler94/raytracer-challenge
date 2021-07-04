@@ -7,10 +7,10 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Tests
 {
-	TEST_CLASS(Chapter1)
+	TEST_CLASS(Chapter1Tuple)
 	{
 	public:
-		
+
 		TEST_METHOD(TestIsPoint)
 		{
 			auto point = Tuple(4.3f, -4.2f, 3.1f, 1.0f);

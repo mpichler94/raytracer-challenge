@@ -9,7 +9,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Tests
 {
-	TEST_CLASS(Chapter4)
+	TEST_CLASS(Chapter4Transformations)
 	{
 	public:
 

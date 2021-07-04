@@ -154,6 +154,49 @@ bool Matrix<4, 4>::isInvertible() const
     return determinant(*this) != 0;
 }
 
+Matrix<4, 4>& Matrix<4u, 4u>::operator=(const Matrix<4, 4>& other)
+{
+    _11 = other._11;
+    _12 = other._12;
+    _13 = other._13;
+    _14 = other._14;
+    _21 = other._21;
+    _22 = other._22;
+    _23 = other._23;
+    _24 = other._24;
+    _31 = other._31;
+    _32 = other._32;
+    _33 = other._33;
+    _34 = other._34;
+    _41 = other._41;
+    _42 = other._42;
+    _43 = other._43;
+    _44 = other._44;
+
+    return *this;
+}
+
+Matrix<4, 4>& Matrix<4u, 4u>::operator=(Matrix<4, 4>&& other)
+{
+    _11 = std::move(other._11);
+    _12 = std::move(other._12);
+    _13 = std::move(other._13);
+    _14 = std::move(other._14);
+    _21 = std::move(other._21);
+    _22 = std::move(other._22);
+    _23 = std::move(other._23);
+    _24 = std::move(other._24);
+    _31 = std::move(other._31);
+    _32 = std::move(other._32);
+    _33 = std::move(other._33);
+    _34 = std::move(other._34);
+    _41 = std::move(other._41);
+    _42 = std::move(other._42);
+    _43 = std::move(other._43);
+    _44 = std::move(other._44);
+    return *this;
+}
+
 Matrix<4, 4> Matrix<4u, 4u>::identity()
 {
     return Matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);

@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace Tests
 {
-	TEST_CLASS(Chapter2)
+	TEST_CLASS(Chapter2Color)
 	{
 	public:
 
@@ -47,7 +47,11 @@ namespace Tests
 			auto c2 = Color(0.9, 1, 0.1);
 			Assert::IsTrue(areEqual(Color(0.9, 0.2, 0.04), c1 * c2));
 		}
+	};
 
+	TEST_CLASS(Chapter2Canvas)
+	{
+	public:
 		TEST_METHOD(TestCanvasConstructor)
 		{
 			auto c = Canvas(10, 20);

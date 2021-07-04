@@ -5,6 +5,9 @@
 #include "canvas.h"
 #include "color.h"
 #include "math.h"
+#include "ray.h"
+#include "primitive.h"
+#include "intersection.h"
 
 struct projectile
 {
@@ -75,9 +78,42 @@ void analogClock()
 	canvas.savePPM("canvas.ppm");
 }
 
+void rayCaster()
+{
+	auto rayOrigin = Tuple::point(0, 0, -5);
+	float wallZ = 10;
+	float wallSize = 7;
+	int canvasPixels = 200;
+	float pixelSize = wallSize / canvasPixels;
+	float half = wallSize / 2.f;
+
+	auto canvas = Canvas(canvasPixels, canvasPixels);
+	auto color = Color(1, 0, 0);
+	auto shape = Sphere();
+	shape.transform = scaling(1, 0.5, 1);
+
+	for (int y = 0; y < canvasPixels; y++)
+	{
+		float worldY = half - pixelSize * y;
+		for (int x = 0; x < canvasPixels; x++)
+		{
+			float worldX = -half + pixelSize * x;
+			auto pos = Tuple::point(worldX, worldY, wallZ);
+			auto ray = Ray(rayOrigin, normalize(pos - rayOrigin));
+			auto xs = shape.intersect(ray).hit();
+			if (xs != nullptr)
+			{
+				canvas.writePixel(x, y, color);
+			}
+		}
+	}
+	canvas.savePPM("canvas.ppm");
+}
+
 int main(char* ars[])
 {
 	//projectileLaucher();
-	analogClock();
+	//analogClock();
+	rayCaster();
 
 }
