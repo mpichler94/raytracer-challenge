@@ -3,6 +3,7 @@
 #include <vector>
 #include "tuple.h"
 #include "matrix.h"
+#include "material.h"
 
 class Ray;
 class Intersections;
@@ -11,11 +12,13 @@ class Primitive
 {
 public:
 	Matrix<4, 4> transform;
+	Material material;
 
 public:
 	Primitive();
 
 	virtual Intersections intersect(const Ray& r) const = 0;
+	virtual Tuple normal(const Tuple& point) const = 0;
 
 	virtual bool operator==(const Primitive& rhs) const = 0;
 
@@ -32,6 +35,7 @@ public:
 	Sphere();
 
 	virtual Intersections intersect(const Ray& r) const override;
+	virtual Tuple normal(const Tuple& point) const override;
 
 	virtual bool operator==(const Primitive& rhs) const override;
 

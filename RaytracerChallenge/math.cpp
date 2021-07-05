@@ -36,3 +36,7 @@ Matrix<4, 4> shearing(float xy, float xz, float yx, float yz, float zx, float zy
 	return Matrix<4, 4>(1, xy, xz, 0, yx, 1, yz, 0, zx, zy, 1, 0, 0, 0, 0, 1);
 }
 
+Tuple reflect(const Tuple& v, const Tuple& n)
+{
+	return v - n * 2 * dot(v, n);
+}

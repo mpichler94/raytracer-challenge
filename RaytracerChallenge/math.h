@@ -1,6 +1,7 @@
 #pragma once
 
 #include "matrix.h"
+#include "tuple.h"
 
 const float pi = 3.1415926535897932384626434f;
 const float e = 2.7182818284590452353602875f;
@@ -17,3 +18,5 @@ Matrix<4, 4> rotationY(float r);
 Matrix<4, 4> rotationZ(float r);
 
 Matrix<4, 4> shearing(float xy, float xz, float yx, float yz, float zx, float zy);
+
+Tuple reflect(const Tuple& v, const Tuple& n);

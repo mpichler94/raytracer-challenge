@@ -8,7 +8,7 @@
 #include "ray.h"
 
 Primitive::Primitive()
-    : transform(Matrix<4, 4>::identity())
+    : transform(Matrix<4, 4>::identity()), material()
 {
 }
 
@@ -35,6 +35,13 @@ Intersections Sphere::intersect(const Ray& ray) const
     Intersection i1(t1, *this);
     Intersection i2(t2, *this);
     return Intersections{i1, i2};
+}
+
+Tuple Sphere::normal(const Tuple& point) const
+{
+    auto n = normalize(transpose(inverse(transform)) * (inverse(transform) * (point - center)));
+    n.w = 0.f;
+    return n;
 }
 
 template<typename Base, typename T>

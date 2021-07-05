@@ -226,6 +226,7 @@
     <ClCompile Include="chapter3.cpp" />
     <ClCompile Include="chapter4.cpp" />
     <ClCompile Include="chapter5.cpp" />
+    <ClCompile Include="chapter6.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Test|Win32'">Create</PrecompiledHeader>

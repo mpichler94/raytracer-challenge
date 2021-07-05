@@ -78,7 +78,7 @@ void analogClock()
 	canvas.savePPM("canvas.ppm");
 }
 
-void rayCaster()
+void silhouetteRayCaster()
 {
 	auto rayOrigin = Tuple::point(0, 0, -5);
 	float wallZ = 10;
@@ -90,7 +90,10 @@ void rayCaster()
 	auto canvas = Canvas(canvasPixels, canvasPixels);
 	auto color = Color(1, 0, 0);
 	auto shape = Sphere();
-	shape.transform = scaling(1, 0.5, 1);
+	//shape.transform = scaling(1, 0.5, 1);
+	//shape.transform = scaling(0.5, 1, 1);
+	//shape.transform = rotationZ(pi / 4) * scaling(0.5, 1, 1);
+	//shape.transform = shearing(1, 0, 0, 0, 0, 0) * scaling(0.5, 1, 1);
 
 	for (int y = 0; y < canvasPixels; y++)
 	{
@@ -110,10 +113,57 @@ void rayCaster()
 	canvas.savePPM("canvas.ppm");
 }
 
+void rayCaster()
+{
+	auto rayOrigin = Tuple::point(0, 0, -5);
+	float wallZ = 10;
+	float wallSize = 7;
+	int canvasPixels = 800;
+	float pixelSize = wallSize / canvasPixels;
+	float half = wallSize / 2.f;
+
+	auto canvas = Canvas(canvasPixels, canvasPixels);
+
+	auto shape = Sphere();
+	shape.material = Material();
+	shape.material.color = Color(1, 0.2, 1);
+	//shape.transform = scaling(1, 0.5, 1);
+	//shape.transform = scaling(0.5, 1, 1);
+	//shape.transform = rotationZ(pi / 4) * scaling(0.5, 1, 1);
+	//shape.transform = shearing(1, 0, 0, 0, 0, 0) * scaling(0.5, 1, 1);
+
+	auto lightPos = Tuple::point(-10, 10, -10);
+	auto lightColor = Color(1, 1, 1);
+	auto light = PointLight(lightPos, lightColor);
+
+	for (int y = 0; y < canvasPixels; y++)
+	{
+		float worldY = half - pixelSize * y;
+		for (int x = 0; x < canvasPixels; x++)
+		{
+			float worldX = -half + pixelSize * x;
+			auto pos = Tuple::point(worldX, worldY, wallZ);
+			auto ray = Ray(rayOrigin, normalize(pos - rayOrigin));
+			auto xs = shape.intersect(ray);
+			auto hit = xs.hit();
+			if (hit != nullptr)
+			{
+				auto point = ray.pos(hit->t);
+				auto normal = hit->primitive.normal(point);
+				auto eye = -ray.direction;
+				Color color = hit->primitive.material.lighting(light, point, eye, normal);
+				canvas.writePixel(x, y, color);
+			}
+		}
+	}
+	canvas.savePPM("canvas.ppm");
+}
+
 int main(char* ars[])
 {
 	//projectileLaucher();
 	//analogClock();
+	//silhouetteRayCaster();
 	rayCaster();
 
 }
