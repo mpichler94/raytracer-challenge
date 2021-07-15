@@ -43,7 +43,8 @@ public:
 
 	//friend bool operator==(const Sphere& lhs, const Sphere& rhs);
 
-	friend std::wstring ToString(const Primitive& s);
+	friend std::wstring ToString(const Primitive& p);
+	friend std::wstring ToString(const Primitive* p);
 	friend std::wstring ToString(const Sphere& s);
 };
 

@@ -8,6 +8,7 @@
 #include "ray.h"
 #include "primitive.h"
 #include "intersection.h"
+#include "camera.h"
 
 struct projectile
 {
@@ -21,6 +22,7 @@ struct environment
 	Tuple wind;		// vector
 };
 
+// chapter 1
 projectile tick(environment env, projectile proj)
 {
 	auto pos = proj.position + proj.velocity;
@@ -28,6 +30,7 @@ projectile tick(environment env, projectile proj)
 	return projectile(pos, vel);
 }
 
+// chapter 2
 void projectileLaucher()
 {
 	// projectile starts one unit above the origin.
@@ -78,6 +81,7 @@ void analogClock()
 	canvas.savePPM("canvas.ppm");
 }
 
+// chapter 5
 void silhouetteRayCaster()
 {
 	auto rayOrigin = Tuple::point(0, 0, -5);
@@ -113,6 +117,7 @@ void silhouetteRayCaster()
 	canvas.savePPM("canvas.ppm");
 }
 
+// chapter 6
 void rayCaster()
 {
 	auto rayOrigin = Tuple::point(0, 0, -5);
@@ -149,9 +154,9 @@ void rayCaster()
 			if (hit != nullptr)
 			{
 				auto point = ray.pos(hit->t);
-				auto normal = hit->primitive.normal(point);
+				auto normal = hit->primitive->normal(point);
 				auto eye = -ray.direction;
-				Color color = hit->primitive.material.lighting(light, point, eye, normal);
+				Color color = hit->primitive->material.lighting(light, point, eye, normal);
 				canvas.writePixel(x, y, color);
 			}
 		}
@@ -159,11 +164,67 @@ void rayCaster()
 	canvas.savePPM("canvas.ppm");
 }
 
+// chapter 7
+void simpleWorld()
+{
+	auto floor = Sphere();
+	floor.transform = scaling(10, 0.01, 10);
+	floor.material = Material();
+	floor.material.color = Color(1, 0.9, 0.9);
+	floor.material.specular = 0;
+
+	auto leftWall = Sphere();
+	leftWall.transform = translation(0, 0, 5) * rotationY(-pi / 4) * rotationX(pi / 2) * scaling(10, 0.1, 10);
+	leftWall.material = floor.material;
+
+	auto rightWall = Sphere();
+	rightWall.transform = translation(0, 0, 5) * rotationY(pi / 4) * rotationX(pi / 2) * scaling(10, 0.1, 10);
+	rightWall.material = floor.material;
+
+	auto middle = Sphere();
+	middle.transform = translation(-0.5, 1, 0.5);
+	middle.material = Material();
+	middle.material.color = Color(0.1, 1, 0.5);
+	middle.material.diffuse = 0.7;
+	middle.material.specular = 0.3;
+
+	auto right = Sphere();
+	right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5);
+	right.material = Material();
+	right.material.color = Color(0.5, 1, 0.1);
+	right.material.diffuse = 0.7;
+	right.material.specular = 0.3;
+
+	auto left = Sphere();
+	left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33);
+	left.material = Material();
+	left.material.color = Color(1, 0.8, 0.1);
+	left.material.diffuse = 0.7;
+	left.material.specular = 0.3;
+
+	auto world = World();
+	world.light = PointLight(Tuple::point(-10, 10, -10), Color(1, 1, 1));
+	world.addObject(&floor);
+	world.addObject(&leftWall);
+	world.addObject(&rightWall);
+	world.addObject(&middle);
+	world.addObject(&left);
+	world.addObject(&right);
+
+	auto camera = Camera(800, 400, pi / 3);
+	camera.setTransform(viewTransform(Tuple::point(0, 1.5, -5), Tuple::point(0, 1, 0), Tuple::point(0, 1, 0)));
+
+	auto canvas = camera.render(world);
+	canvas.savePPM("canvas.ppm");
+}
+
+
 int main(char* ars[])
 {
 	//projectileLaucher();
 	//analogClock();
 	//silhouetteRayCaster();
-	rayCaster();
+	//rayCaster();
+	simpleWorld();
 
 }

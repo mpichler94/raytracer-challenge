@@ -197,6 +197,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="camera.h" />
     <ClInclude Include="canvas.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="intersection.h" />
@@ -207,8 +208,10 @@
     <ClInclude Include="primitive.h" />
     <ClInclude Include="ray.h" />
     <ClInclude Include="tuple.h" />
+    <ClInclude Include="world.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="canvas.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="intersection.cpp" />
@@ -220,6 +223,7 @@
     <ClCompile Include="primitive.cpp" />
     <ClCompile Include="ray.cpp" />
     <ClCompile Include="tuple.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

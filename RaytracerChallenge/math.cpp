@@ -40,3 +40,15 @@ Tuple reflect(const Tuple& v, const Tuple& n)
 {
 	return v - n * 2 * dot(v, n);
 }
+
+Matrix<4, 4> viewTransform(const Tuple& from, const Tuple& to, const Tuple& up)
+{
+	auto forward = normalize(to - from);
+	auto left = cross(forward, normalize(up));
+	auto trueUp = cross(left, forward);
+
+
+	auto orientation = Matrix<4, 4>(left.x, left.y, left.z, 0, trueUp.x, trueUp.y, trueUp.z, 0, -forward.x, -forward.y, -forward.z, 0, 0, 0, 0, 1);
+	return orientation * translation(-from.x, -from.y, -from.z);
+}
+

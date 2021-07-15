@@ -20,3 +20,5 @@ Matrix<4, 4> rotationZ(float r);
 Matrix<4, 4> shearing(float xy, float xz, float yx, float yz, float zx, float zy);
 
 Tuple reflect(const Tuple& v, const Tuple& n);
+
+Matrix<4, 4> viewTransform(const Tuple& from, const Tuple& to, const Tuple& up);

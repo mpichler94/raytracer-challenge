@@ -90,18 +90,18 @@ namespace Tests
 		TEST_METHOD(TestIntersection)
 		{
 			auto s = Sphere();
-			auto i = Intersection(3.5, s);
+			auto i = Intersection(3.5, &s);
 
 			Assert::AreEqual(3.5f, i.t);
-			Assert::AreEqual((void*)&s, (void*)&i.primitive);
-			Assert::AreEqual(s, static_cast<const Sphere&>(i.primitive));
+			Assert::AreEqual((void*)&s, (void*)i.primitive);
+			Assert::AreEqual(s, static_cast<const Sphere&>(*i.primitive));
 		}
 
 		TEST_METHOD(TestIntersections)
 		{
 			auto s = Sphere();
-			auto i1 = Intersection(1, s);
-			auto i2 = Intersection(2, s);
+			auto i1 = Intersection(1, &s);
+			auto i2 = Intersection(2, &s);
 			auto xs = Intersections({ i1, i2 });
 
 			Assert::AreEqual(2ull, xs.count());
@@ -117,15 +117,15 @@ namespace Tests
 			auto xs = s.intersect(r);
 
 			Assert::AreEqual(2ull, xs.count());
-			Assert::AreEqual(s, static_cast<const Sphere&>(xs[0].primitive));
-			Assert::AreEqual(s, static_cast<const Sphere&>(xs[1].primitive));
+			Assert::AreEqual(s, static_cast<const Sphere&>(*xs[0].primitive));
+			Assert::AreEqual(s, static_cast<const Sphere&>(*xs[1].primitive));
 		}
 
 		TEST_METHOD(TestHitAllPositive)
 		{
 			auto s = Sphere();
-			const auto i1 = Intersection(1, s);
-			auto i2 = Intersection(2, s);
+			const auto i1 = Intersection(1, &s);
+			auto i2 = Intersection(2, &s);
 			auto xs = Intersections{ i2, i1 };
 
 			auto i = xs.hit();
@@ -135,8 +135,8 @@ namespace Tests
 		TEST_METHOD(TestHitSomeNegative)
 		{
 			auto s = Sphere();
-			auto i1 = Intersection(-1, s);
-			const auto i2 = Intersection(1, s);
+			auto i1 = Intersection(-1, &s);
+			const auto i2 = Intersection(1, &s);
 			auto xs = Intersections{ i2, i1 };
 
 			auto i = xs.hit();
@@ -146,8 +146,8 @@ namespace Tests
 		TEST_METHOD(TestHitAllNegative)
 		{
 			auto s = Sphere();
-			auto i1 = Intersection(-2, s);
-			auto i2 = Intersection(-1, s);
+			auto i1 = Intersection(-2, &s);
+			auto i2 = Intersection(-1, &s);
 			auto xs = Intersections{ i2, i1 };
 
 			auto i = xs.hit();
@@ -157,10 +157,10 @@ namespace Tests
 		TEST_METHOD(TestHitLowestNonnegative)
 		{
 			auto s = Sphere();
-			auto i1 = Intersection(5, s);
-			auto i2 = Intersection(7, s);
-			auto i3 = Intersection(-3, s);
-			const auto i4 = Intersection(2, s);
+			auto i1 = Intersection(5, &s);
+			auto i2 = Intersection(7, &s);
+			auto i3 = Intersection(-3, &s);
+			const auto i4 = Intersection(2, &s);
 			auto xs = Intersections{ i1, i2, i3, i4 };
 
 			auto i = xs.hit();

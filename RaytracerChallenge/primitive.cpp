@@ -32,16 +32,19 @@ Intersections Sphere::intersect(const Ray& ray) const
 
     auto t1 = (-b - sqrtf(discriminant)) / (2 * a);
     auto t2 = (-b + sqrtf(discriminant)) / (2 * a);
-    Intersection i1(t1, *this);
-    Intersection i2(t2, *this);
+    Intersection i1(t1, this);
+    Intersection i2(t2, this);
     return Intersections{i1, i2};
 }
 
 Tuple Sphere::normal(const Tuple& point) const
 {
-    auto n = normalize(transpose(inverse(transform)) * (inverse(transform) * (point - center)));
-    n.w = 0.f;
-    return n;
+    auto invTransform = inverse(transform);
+    auto objectPoint = invTransform * point;
+    auto objectNormal = objectPoint - center;
+    auto worldNormal = transpose(invTransform) * objectNormal;
+    worldNormal.w = 0.f;
+    return normalize(worldNormal);
 }
 
 template<typename Base, typename T>
@@ -52,8 +55,8 @@ inline bool instanceof(const T*)
 
 bool Sphere::operator==(const Primitive& rhs) const
 {
-    if (!instanceof<Sphere>(&rhs))
-        return false;
+    //if (!instanceof<Sphere>(&rhs))
+        //return false;
     const Sphere& s = dynamic_cast<const Sphere&>(rhs);
     return center == s.center && areEqual(radius, s.radius);
 }
@@ -68,13 +71,16 @@ std::wstring Sphere::toString() const
 //    return lhs.center == rhs.center && areEqual(lhs.radius, rhs.radius);
 //}
 
+std::wstring ToString(const Primitive* p)
+{
+    const auto s = static_cast<const Sphere*>(p);
+    return ToString(*s);
+}
+
 std::wstring ToString(const Primitive& p)
 {
     const auto& s = static_cast<const Sphere&>(p);
-    std::wstringstream ss;
-    ss << std::fixed << std::setprecision(2);
-    ss << "Sphere at (" << s.center.x << ", " << s.center.y << ", " << s.center.z << ") with radius " << s.radius << std::endl;
-    return ss.str();
+    return ToString(s);
 }
 
 std::wstring ToString(const Sphere& s)

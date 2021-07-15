@@ -1,14 +1,30 @@
 #include "intersection.h"
+
 #include <algorithm>
 #include <sstream>
+
 #include "math.h"
 #include "primitive.h"
+#include "ray.h"
 
 
 
-Intersection::Intersection(float t, const Primitive& primitive)
+Intersection::Intersection(float t, const Primitive* primitive)
 	: t(t), primitive(primitive)
 {
+}
+
+Computations Intersection::prepare(const Ray& ray) const
+{
+	return Computations(t, primitive, ray.pos(t), -ray.direction, primitive->normal(ray.pos(t)));
+}
+
+Intersection& Intersection::operator=(const Intersection& i)
+{
+	primitive = i.primitive;
+	t = i.t;
+
+	return *this;
 }
 
 bool operator==(const Intersection& lhs, const Intersection& rhs)
@@ -19,7 +35,7 @@ bool operator==(const Intersection& lhs, const Intersection& rhs)
 std::wstring ToString(const Intersection& i)
 {
 	std::wstringstream ss;
-	ss << "Intersection at " << i.t << " with " << i.primitive.toString();
+	ss << "Intersection at " << i.t << " with " << i.primitive->toString();
 	return ss.str();
 }
 
@@ -65,4 +81,12 @@ const Intersection& Intersections::operator[](int i) const
 Intersection& Intersections::operator[](int i)
 {
 	return intersections.at(i);
+}
+
+Intersections& Intersections::operator+=(const Intersections& rhs)
+{
+	for (auto i : rhs.intersections)
+		intersections.push_back(i);
+	std::sort(intersections.begin(), intersections.end(), [](const auto& l, const auto& r) { return l.t < r.t; });
+	return *this;
 }
