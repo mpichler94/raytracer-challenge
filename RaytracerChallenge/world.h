@@ -28,5 +28,7 @@ public:
 	Intersections intersect(const Ray& ray) const;
 
 	Color colorAt(const Ray& r) const;
+
+	bool isShadowed(const Tuple& point) const;
 };
 

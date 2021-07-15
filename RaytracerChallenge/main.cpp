@@ -156,7 +156,7 @@ void rayCaster()
 				auto point = ray.pos(hit->t);
 				auto normal = hit->primitive->normal(point);
 				auto eye = -ray.direction;
-				Color color = hit->primitive->material.lighting(light, point, eye, normal);
+				Color color = hit->primitive->material.lighting(light, point, eye, normal, false);
 				canvas.writePixel(x, y, color);
 			}
 		}
@@ -182,7 +182,7 @@ void simpleWorld()
 	rightWall.material = floor.material;
 
 	auto middle = Sphere();
-	middle.transform = translation(-0.5, 1, 0.5);
+	middle.transform = translation(-0.5, 1, 0.5) * scaling(0.6, 0.4, 2.0);
 	middle.material = Material();
 	middle.material.color = Color(0.1, 1, 0.5);
 	middle.material.diffuse = 0.7;

@@ -1,6 +1,8 @@
 #include "world.h"
+
 #include "math.h"
 #include "intersection.h"
+#include "ray.h"
 
 World::World()
     : objects(), light()
@@ -78,4 +80,16 @@ Color World::colorAt(const Ray& ray) const
         return Color(0, 0, 0);
     auto comps = hit->prepare(ray);
     return comps.shade(*this);
+}
+
+bool World::isShadowed(const Tuple& point) const
+{
+    auto direction = light.position - point;
+    auto distance = length(direction);
+    auto ray = Ray(point, normalize(direction));
+
+    auto xs = intersect(ray);
+    auto hit = xs.hit();
+
+    return hit != nullptr && hit->t < distance;
 }

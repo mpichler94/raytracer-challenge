@@ -3,6 +3,7 @@
 #include <optional>
 #include <vector>
 
+#include "math.h"
 #include "primitive.h"
 #include "world.h"
 
@@ -14,6 +15,7 @@ struct Computations
 	Tuple eyev;
 	Tuple normal;
 	bool inside;
+	Tuple overPoint;
 
 	Computations(float t, const Primitive* object, const Tuple& point, const Tuple& eyev, const Tuple& normal)
 		: t(t), object(object), point(point), eyev(eyev), normal(normal), inside(false)
@@ -23,11 +25,14 @@ struct Computations
 			inside = true;
 			this->normal = -normal;
 		}
+
+		overPoint = point + this->normal * EPSILON;
 	}
 
 	Color shade(const World& w) const
 	{
-		return object->material.lighting(w.light, point, eyev, normal);
+		bool isShadowed = w.isShadowed(overPoint);
+		return object->material.lighting(w.light, point, eyev, normal, isShadowed);
 	}
 };
 

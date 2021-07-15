@@ -15,7 +15,7 @@ public:
 public:
 	Material();
 
-	Color lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal) const;
+	Color lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal, const bool inShadow) const;
 
 	bool operator==(const Material& rhs) const;
 

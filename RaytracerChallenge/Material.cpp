@@ -9,14 +9,19 @@ Material::Material()
 {
 }
 
-Color Material::lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal) const
+Color Material::lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal, const bool inShadow) const
 {
 	// combine surface color with light color/intensity
 	const Color effectiveColor = color * light.intensity;
+	const Color ambientColor = effectiveColor * ambient;
+
+	if (inShadow)
+	{
+		return ambientColor;
+	}
+
 	// directon TO the light source
 	const Tuple l = normalize(light.position - pos);
-
-	const Color ambientColor = effectiveColor * ambient;
 
 	const float lightDotNormal = dot(l, normal);
 

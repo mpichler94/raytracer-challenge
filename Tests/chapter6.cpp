@@ -159,7 +159,7 @@ namespace Tests
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 0, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv);
+			auto result = m.lighting(light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(1.9, 1.9, 1.9), result);
 		}
@@ -172,7 +172,7 @@ namespace Tests
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 0, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv);
+			auto result = m.lighting(light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(1.0, 1.0, 1.0), result);
 		}
@@ -185,7 +185,7 @@ namespace Tests
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 10, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv);
+			auto result = m.lighting(light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(0.7364, 0.7364, 0.7364), result);
 		}
