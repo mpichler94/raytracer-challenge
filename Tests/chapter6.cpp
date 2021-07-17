@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../RaytracerChallenge/math.h"
 #include "../RaytracerChallenge/ray.h"
-#include "../RaytracerChallenge/primitive.h"
+#include "../RaytracerChallenge/shape.h"
 #include "../RaytracerChallenge/intersection.h"
 #include "../RaytracerChallenge/color.h"
 #include "../RaytracerChallenge/light.h"

@@ -1,12 +1,15 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+
+#include <Shlwapi.h>
+
 #include "tuple.h"
 #include "canvas.h"
 #include "color.h"
 #include "math.h"
 #include "ray.h"
-#include "primitive.h"
+#include "shape.h"
 #include "intersection.h"
 #include "camera.h"
 
@@ -218,6 +221,61 @@ void simpleWorld()
 	canvas.savePPM("canvas.ppm");
 }
 
+// chapter 9
+void worldWithPlanes()
+{
+	auto floor = Plane();
+	//floor.transform = scaling(10, 0.01, 10);
+	floor.material = Material();
+	floor.material.color = Color(1, 0.9, 0.9);
+	floor.material.specular = 0;
+
+	auto leftWall = Plane();
+	leftWall.transform = translation(0, 0, 5) * rotationY(-pi / 4) * rotationX(pi / 2);
+	leftWall.material = floor.material;
+
+	auto rightWall = Plane();
+	rightWall.transform = translation(0, 0, 5) * rotationY(pi / 4) * rotationX(pi / 2);
+	rightWall.material = floor.material;
+
+	auto middle = Sphere();
+	middle.transform = translation(-0.5, 1, 0.5) * scaling(0.6, 0.4, 2.0);
+	middle.material = Material();
+	middle.material.color = Color(0.1, 1, 0.5);
+	middle.material.diffuse = 0.7;
+	middle.material.specular = 0.3;
+
+	auto right = Sphere();
+	right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5);
+	right.material = Material();
+	right.material.color = Color(0.5, 1, 0.1);
+	right.material.diffuse = 0.7;
+	right.material.specular = 0.3;
+
+	auto left = Sphere();
+	left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33);
+	left.material = Material();
+	left.material.color = Color(1, 0.8, 0.1);
+	left.material.diffuse = 0.7;
+	left.material.specular = 0.3;
+
+	auto world = World();
+	world.light = PointLight(Tuple::point(-10, 10, -10), Color(1, 1, 1));
+	world.addObject(&floor);
+	world.addObject(&leftWall);
+	world.addObject(&rightWall);
+	world.addObject(&middle);
+	world.addObject(&left);
+	world.addObject(&right);
+
+	auto camera = Camera(800, 400, pi / 3);
+	camera.setTransform(viewTransform(Tuple::point(0, 1.5, -5), Tuple::point(0, 1, 0), Tuple::point(0, 1, 0)));
+
+	auto canvas = camera.render(world);
+	canvas.savePPM("canvas.ppm");
+
+	ShellExecute(NULL, NULL, L"canvas.ppm", NULL, NULL, SW_SHOW);
+}
 
 int main(char* ars[])
 {
@@ -225,6 +283,7 @@ int main(char* ars[])
 	//analogClock();
 	//silhouetteRayCaster();
 	//rayCaster();
-	simpleWorld();
+	//simpleWorld();
+	worldWithPlanes();
 
 }

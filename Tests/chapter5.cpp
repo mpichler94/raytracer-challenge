@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../RaytracerChallenge/math.h"
 #include "../RaytracerChallenge/ray.h"
-#include "../RaytracerChallenge/primitive.h"
+#include "../RaytracerChallenge/shape.h"
 #include "../RaytracerChallenge/intersection.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
@@ -109,7 +109,7 @@ namespace Tests
 			Assert::AreEqual(2.f, xs[1].t);
 		}
 
-		TEST_METHOD(TestIntersectionsPrimitive)
+		TEST_METHOD(TestIntersectionsShape)
 		{
 			auto r = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
 			auto s = Sphere();

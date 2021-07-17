@@ -14,3 +14,10 @@ Ray Ray::transform(const Matrix<4, 4>& transform) const
 {
 	return Ray(transform * origin, transform * direction);
 }
+
+Ray& Ray::operator=(const Ray& other)
+{
+	origin = other.origin;
+	direction = other.direction;
+	return *this;
+}

@@ -3,12 +3,12 @@
 #include <vector>
 #include <memory>
 #include "light.h"
-#include "primitive.h"
+#include "shape.h"
 
 class World
 {
 private:
-	std::vector<Primitive*> objects;
+	std::vector<Shape*> objects;
 
 public:
 	Light light;
@@ -22,9 +22,9 @@ public:
 	void dispose();
 
 	size_t getObjectCount() const;
-	bool contains(const Primitive& p) const;
-	void addObject(Primitive* p);
-	Primitive* getObject(size_t index);
+	bool contains(const Shape& p) const;
+	void addObject(Shape* p);
+	Shape* getObject(size_t index);
 	Intersections intersect(const Ray& ray) const;
 
 	Color colorAt(const Ray& r) const;

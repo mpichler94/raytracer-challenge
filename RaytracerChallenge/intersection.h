@@ -4,20 +4,20 @@
 #include <vector>
 
 #include "math.h"
-#include "primitive.h"
+#include "shape.h"
 #include "world.h"
 
 struct Computations
 {
 	float t;
-	const Primitive* object;
+	const Shape* object;
 	Tuple point;
 	Tuple eyev;
 	Tuple normal;
 	bool inside;
 	Tuple overPoint;
 
-	Computations(float t, const Primitive* object, const Tuple& point, const Tuple& eyev, const Tuple& normal)
+	Computations(float t, const Shape* object, const Tuple& point, const Tuple& eyev, const Tuple& normal)
 		: t(t), object(object), point(point), eyev(eyev), normal(normal), inside(false)
 	{
 		if (dot(normal, eyev) < 0)
@@ -40,10 +40,10 @@ class Intersection
 {
 public :
 	float t;
-	const Primitive* primitive;
+	const Shape* primitive;
 
 public:
-	Intersection(float t, const Primitive* primitive);
+	Intersection(float t, const Shape* primitive);
 
 	Computations prepare(const Ray& ray) const;
 

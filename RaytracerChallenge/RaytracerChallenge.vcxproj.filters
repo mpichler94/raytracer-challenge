@@ -39,7 +39,7 @@
     <ClInclude Include="ray.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="primitive.h">
+    <ClInclude Include="shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="intersection.h">
@@ -80,7 +80,7 @@
     <ClCompile Include="ray.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
-    <ClCompile Include="primitive.cpp">
+    <ClCompile Include="shape.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="intersection.cpp">
@@ -89,13 +89,13 @@
     <ClCompile Include="light.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Material.cpp">
+    <ClCompile Include="material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="World.cpp">
+    <ClCompile Include="world.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

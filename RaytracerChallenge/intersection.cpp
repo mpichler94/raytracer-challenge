@@ -4,12 +4,12 @@
 #include <sstream>
 
 #include "math.h"
-#include "primitive.h"
+#include "shape.h"
 #include "ray.h"
 
 
 
-Intersection::Intersection(float t, const Primitive* primitive)
+Intersection::Intersection(float t, const Shape* primitive)
 	: t(t), primitive(primitive)
 {
 }

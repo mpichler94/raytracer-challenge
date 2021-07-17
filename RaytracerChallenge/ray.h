@@ -11,9 +11,12 @@ public:
 	Tuple direction;
 
 public:
+	Ray();
 	Ray(const Tuple& origin, const Tuple& direction);
 
 	Tuple pos(float t) const;
 	Ray transform(const Matrix<4, 4>& transform) const;
+
+	Ray& operator=(const Ray& other);
 };
 

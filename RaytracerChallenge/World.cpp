@@ -40,7 +40,7 @@ size_t World::getObjectCount() const
     return objects.size();
 }
 
-bool World::contains(const Primitive& p) const
+bool World::contains(const Shape& p) const
 {
     for (auto it = objects.begin(); it != objects.end(); it++)
     {
@@ -51,12 +51,12 @@ bool World::contains(const Primitive& p) const
     return false;
 }
 
-void World::addObject(Primitive* p)
+void World::addObject(Shape* p)
 {
     objects.push_back(p);
 }
 
-Primitive* World::getObject(size_t index)
+Shape* World::getObject(size_t index)
 {
     return objects[index];
 }
