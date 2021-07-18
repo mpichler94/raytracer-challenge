@@ -1,11 +1,13 @@
 #pragma once
 
-#include <optional>
 #include <vector>
 
 #include "math.h"
-#include "shape.h"
-#include "world.h"
+#include "color.h"
+
+class Shape;
+class Ray;
+class World;
 
 struct Computations
 {
@@ -29,11 +31,7 @@ struct Computations
 		overPoint = point + this->normal * EPSILON;
 	}
 
-	Color shade(const World& w) const
-	{
-		bool isShadowed = w.isShadowed(overPoint);
-		return object->material.lighting(w.light, point, eyev, normal, isShadowed);
-	}
+	Color shade(const World& w) const;
 };
 
 class Intersection

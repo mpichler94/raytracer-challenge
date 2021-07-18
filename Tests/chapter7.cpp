@@ -6,6 +6,7 @@
 #include "../RaytracerChallenge/ray.h"
 #include "../RaytracerChallenge/intersection.h"
 #include "../RaytracerChallenge/camera.h"
+#include "../RaytracerChallenge/shape.h"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

@@ -12,6 +12,7 @@
 #include "shape.h"
 #include "intersection.h"
 #include "camera.h"
+#include "world.h"
 
 struct projectile
 {

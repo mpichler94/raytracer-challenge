@@ -1,5 +1,8 @@
 #include "camera.h"
 
+#include "world.h"
+#include "color.h"
+
 Camera::Camera(unsigned int width, unsigned int height, float fov)
 	: width(width), height(height), fov(fov), transform(Matrix<4, 4>::identity())
 {

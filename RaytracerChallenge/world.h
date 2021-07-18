@@ -2,8 +2,11 @@
 
 #include <vector>
 #include <memory>
+
 #include "light.h"
-#include "shape.h"
+#include "intersection.h"
+
+class Shape;
 
 class World
 {

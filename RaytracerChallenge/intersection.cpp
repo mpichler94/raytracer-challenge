@@ -6,8 +6,15 @@
 #include "math.h"
 #include "shape.h"
 #include "ray.h"
+#include "world.h"
+#include "material.h"
 
 
+Color Computations::shade(const World& w) const
+{
+	bool isShadowed = w.isShadowed(overPoint);
+	return object->material.lighting(w.light, point, eyev, normal, isShadowed);
+}
 
 Intersection::Intersection(float t, const Shape* primitive)
 	: t(t), primitive(primitive)

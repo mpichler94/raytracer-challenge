@@ -3,6 +3,8 @@
 #include "color.h"
 #include "light.h"
 
+class Pattern;
+
 class Material
 {
 public:
@@ -11,6 +13,7 @@ public:
 	float diffuse;
 	float specular;
 	float shininess;
+	Pattern* pattern;
 
 public:
 	Material();

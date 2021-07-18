@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "math.h"
+#include "pattern.h"
 
 Material::Material()
 	: color(1, 1, 1), ambient(0.1f), diffuse(0.9f), specular(0.9f), shininess(200.f)
@@ -11,6 +12,11 @@ Material::Material()
 
 Color Material::lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal, const bool inShadow) const
 {
+	Color color;
+	if (pattern != nullptr)
+		color = pattern->colorAt(pos);
+	else
+		color = this->color;
 	// combine surface color with light color/intensity
 	const Color effectiveColor = color * light.intensity;
 	const Color ambientColor = effectiveColor * ambient;

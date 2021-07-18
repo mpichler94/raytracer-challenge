@@ -3,6 +3,7 @@
 #include "math.h"
 #include "intersection.h"
 #include "ray.h"
+#include "shape.h"
 
 World::World()
     : objects(), light()

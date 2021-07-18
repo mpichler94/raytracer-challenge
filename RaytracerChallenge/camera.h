@@ -2,8 +2,9 @@
 
 #include "math.h"
 #include "ray.h"
-#include "world.h"
 #include "canvas.h"
+
+class World;
 
 class Camera
 {

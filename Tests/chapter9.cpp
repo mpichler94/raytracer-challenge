@@ -2,10 +2,10 @@
 #include "CppUnitTest.h"
 #include <iostream>
 #include "../RaytracerChallenge/math.h"
-#include "../RaytracerChallenge/world.h"
+#include "../RaytracerChallenge/shape.h"
+#include "../RaytracerChallenge/material.h"
 #include "../RaytracerChallenge/ray.h"
 #include "../RaytracerChallenge/intersection.h"
-#include "../RaytracerChallenge/camera.h"
 
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
