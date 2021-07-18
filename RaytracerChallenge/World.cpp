@@ -16,11 +16,11 @@ World World::Default()
     World w = World();
     w.light = PointLight(Tuple::point(-10, 10, -10), Color(1, 1, 1));
     auto s1 = new Sphere();
-    s1->material.color = Color(0.8, 1.0, 0.6);
-    s1->material.diffuse = 0.7;
-    s1->material.specular = 0.2;
+    s1->material.color = Color(0.8f, 1.0f, 0.6f);
+    s1->material.diffuse = 0.7f;
+    s1->material.specular = 0.2f;
     auto s2 = new Sphere();
-    s2->transform = scaling(0.5, 0.5, 0.5);
+    s2->transform = scaling(0.5f, 0.5f, 0.5f);
     w.addObject(s1);
     w.addObject(s2);
     return w;

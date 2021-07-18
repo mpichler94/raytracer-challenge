@@ -13,7 +13,7 @@
 Color Computations::shade(const World& w) const
 {
 	bool isShadowed = w.isShadowed(overPoint);
-	return object->material.lighting(w.light, point, eyev, normal, isShadowed);
+	return object->material.lighting(*object, w.light, point, eyev, normal, isShadowed);
 }
 
 Intersection::Intersection(float t, const Shape* primitive)

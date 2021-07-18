@@ -153,39 +153,42 @@ namespace Tests
 
 		TEST_METHOD(TestLighting)
 		{
+			auto s = Sphere();
 			auto m = Material();
 			auto position = Tuple::point(0, 0, 0);
 			auto eyev = Tuple::vector(0, 0, -1);
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 0, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv, false);
+			auto result = m.lighting(s, light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(1.9, 1.9, 1.9), result);
 		}
 
 		TEST_METHOD(TestLightingEyeOffset)
 		{
+			auto s = Sphere();
 			auto m = Material();
 			auto position = Tuple::point(0, 0, 0);
 			auto eyev = Tuple::vector(0, sqrtHalf, -sqrtHalf);
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 0, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv, false);
+			auto result = m.lighting(s, light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(1.0, 1.0, 1.0), result);
 		}
 
 		TEST_METHOD(TestLightingLightOffset)
 		{
+			auto s = Sphere();
 			auto m = Material();
 			auto position = Tuple::point(0, 0, 0);
 			auto eyev = Tuple::vector(0, 0, -1);
 			auto normalv = Tuple::vector(0, 0, -1);
 			auto light = PointLight(Tuple::point(0, 10, -10), Color(1, 1, 1));
 
-			auto result = m.lighting(light, position, eyev, normalv, false);
+			auto result = m.lighting(s, light, position, eyev, normalv, false);
 
 			Assert::AreEqual(Color(0.7364, 0.7364, 0.7364), result);
 		}

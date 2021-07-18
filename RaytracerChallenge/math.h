@@ -3,7 +3,7 @@
 #include "matrix.h"
 #include "tuple.h"
 
-const float EPSILON = 1e-4;
+const float EPSILON = 1e-4f;
 
 const float pi = 3.1415926535897932384626434f;
 const float e = 2.7182818284590452353602875f;

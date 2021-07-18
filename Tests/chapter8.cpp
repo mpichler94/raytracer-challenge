@@ -18,6 +18,7 @@ namespace Tests
 
 		TEST_METHOD(TestSurfaceInShadow)
 		{
+			auto s = Sphere();
 			auto m = Material();
 			auto position = Tuple::point(0, 0, 0);
 
@@ -26,7 +27,7 @@ namespace Tests
 			auto light = PointLight(Tuple::point(0, 0, -10), Color(1, 1, 1));
 			auto inShadow = true;
 
-			auto result = m.lighting(light, position, eyev, normalv, inShadow);
+			auto result = m.lighting(s, light, position, eyev, normalv, inShadow);
 
 			Assert::AreEqual(Color(0.1, 0.1, 0.1), result);
 		}

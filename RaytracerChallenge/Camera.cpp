@@ -55,8 +55,8 @@ float Camera::getPixelSize() const
 Ray Camera::getRay(unsigned int x, unsigned int y) const
 {
 	// Offset from the edge of the canvas to the pixel's center
-	float xOffset = (x + 0.5) * pixelSize;
-	float yOffset = (y + 0.5) * pixelSize;
+	float xOffset = (x + 0.5f) * pixelSize;
+	float yOffset = (y + 0.5f) * pixelSize;
 	// untranssformed coordinates of the pixel in world space.
 	float worldX = halfWidth - xOffset;
 	float worldY = halfHeight - yOffset;

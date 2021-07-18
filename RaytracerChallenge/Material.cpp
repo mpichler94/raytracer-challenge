@@ -3,18 +3,21 @@
 #include <sstream>
 
 #include "math.h"
+#include "tuple.h"
+#include "light.h"
 #include "pattern.h"
+#include "shape.h"
 
 Material::Material()
-	: color(1, 1, 1), ambient(0.1f), diffuse(0.9f), specular(0.9f), shininess(200.f)
+	: color(1, 1, 1), ambient(0.1f), diffuse(0.9f), specular(0.9f), shininess(200.f), pattern(nullptr)
 {
 }
 
-Color Material::lighting(const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal, const bool inShadow) const
+Color Material::lighting(const Shape& object, const Light& light, const Tuple& pos, const Tuple& eye, const Tuple& normal, const bool inShadow) const
 {
 	Color color;
 	if (pattern != nullptr)
-		color = pattern->colorAt(pos);
+		color = pattern->colorAtShape(object, pos);
 	else
 		color = this->color;
 	// combine surface color with light color/intensity
