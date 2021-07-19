@@ -223,6 +223,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chapter10.cpp" />
+    <ClCompile Include="chapter11.cpp" />
     <ClCompile Include="chapter2.cpp" />
     <ClCompile Include="chapter3.cpp" />
     <ClCompile Include="chapter4.cpp" />

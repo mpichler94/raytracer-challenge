@@ -79,7 +79,7 @@ namespace Tests
 			auto i = Intersection(4, &s2);
 
 			auto comps = i.prepare(r);
-			auto c = comps.shade(w);
+			auto c = comps.shade(w, 5);
 
 			Assert::AreEqual(Color(0.1, 0.1, 0.1), c);
 		}

@@ -4,7 +4,7 @@
 #include "color.h"
 
 Camera::Camera(unsigned int width, unsigned int height, float fov)
-	: width(width), height(height), fov(fov), transform(Matrix<4, 4>::identity())
+	: width(width), height(height), fov(fov), transform(Matrix<4, 4>::identity()), maxBounces(5)
 {
 	float halfView = tanf(fov / 2.f);
 	float aspect = (float) width / height;
@@ -76,8 +76,13 @@ Canvas Camera::render(const World& world) const
 		for (unsigned int x = 0; x < width; x++)
 		{
 			auto ray = getRay(x, y);
-			auto color = world.colorAt(ray);
+			auto color = world.colorAt(ray, maxBounces);
 			c.writePixel(x, y, color);
 		}
 	return c;
+}
+
+void Camera::setMaxBounces(unsigned int maxBounces)
+{
+	this->maxBounces = maxBounces;
 }

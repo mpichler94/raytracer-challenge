@@ -9,11 +9,36 @@
 #include "world.h"
 #include "material.h"
 
+Computations::Computations(float t, const Shape* object, const Ray& ray, const Tuple& normal)
+	: t(t), object(object), point(ray.pos(t)), eyev(-ray.direction), normal(normal), inside(false)
+{
+	if (dot(normal, eyev) < 0.f)
+	{
+		inside = true;
+		this->normal = -normal;
+	}
 
-Color Computations::shade(const World& w) const
+	overPoint = point + this->normal * 1e-4f;
+	reflectv = reflect(ray.direction, this->normal);
+}
+
+Color Computations::shade(const World& w, unsigned int remaining) const
 {
 	bool isShadowed = w.isShadowed(overPoint);
-	return object->material.lighting(*object, w.light, point, eyev, normal, isShadowed);
+	auto surface = object->material.lighting(*object, w.light, overPoint, eyev, normal, isShadowed);
+	auto reflected = reflectedColor(w, remaining);
+	return surface + reflected;
+}
+
+Color Computations::reflectedColor(const World& w, unsigned int remaining) const
+{
+	if (object->material.reflective < EPSILON || remaining < 1)
+		return Color(0);
+
+	auto reflectRay = Ray(overPoint, reflectv);
+	auto color = w.colorAt(reflectRay, remaining - 1);
+
+	return color * object->material.reflective;
 }
 
 Intersection::Intersection(float t, const Shape* primitive)
@@ -23,7 +48,7 @@ Intersection::Intersection(float t, const Shape* primitive)
 
 Computations Intersection::prepare(const Ray& ray) const
 {
-	return Computations(t, primitive, ray.pos(t), -ray.direction, primitive->normal(ray.pos(t)));
+	return Computations(t, primitive, ray, primitive->normal(ray.pos(t)));
 }
 
 Intersection& Intersection::operator=(const Intersection& i)

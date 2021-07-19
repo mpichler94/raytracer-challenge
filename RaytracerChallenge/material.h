@@ -10,11 +10,12 @@ class Light;
 class Material
 {
 public:
-	Color color;
 	float ambient;
 	float diffuse;
 	float specular;
 	float shininess;
+	float reflective;
+	Color color;
 	Pattern* pattern;
 
 public:

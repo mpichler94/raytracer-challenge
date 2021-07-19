@@ -12,6 +12,7 @@ public:
 public:
 	Color() = default;
 	Color(float r, float g, float b);
+	Color(float gray);
 
 	Color& operator=(const Color& c);
 

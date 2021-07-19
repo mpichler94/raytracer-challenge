@@ -15,6 +15,7 @@ bool areEqual(float a, float b, float epsilon = 1e-5f);
 
 Matrix<4, 4> translation(float x, float y, float z);
 Matrix<4, 4> scaling(float x, float y, float z);
+Matrix<4, 4> scaling(float s);
 
 Matrix<4, 4> rotationX(float r);
 Matrix<4, 4> rotationY(float r);

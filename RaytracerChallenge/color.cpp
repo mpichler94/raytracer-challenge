@@ -8,6 +8,11 @@ Color::Color(float r, float g, float b)
 {
 }
 
+Color::Color(float gray)
+	: r(gray), g(gray), b(gray)
+{
+}
+
 Color& Color::operator=(const Color& c)
 {
 	r = c.r;

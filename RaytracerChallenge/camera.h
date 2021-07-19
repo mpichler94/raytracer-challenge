@@ -16,7 +16,7 @@ private:
 	float pixelSize;
 	float halfWidth;
 	float halfHeight;
-
+	unsigned int maxBounces;
 
 public:
 	Camera(unsigned int width, unsigned int height, float fov);
@@ -29,5 +29,6 @@ public:
 	float getPixelSize() const;
 	Ray getRay(unsigned int x, unsigned int y) const;
 	Canvas render(const World& world) const;
+	void setMaxBounces(unsigned int maxBounces);
 };
 

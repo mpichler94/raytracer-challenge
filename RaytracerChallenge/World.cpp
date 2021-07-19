@@ -73,14 +73,14 @@ Intersections World::intersect(const Ray& ray) const
     return ret;
 }
 
-Color World::colorAt(const Ray& ray) const
+Color World::colorAt(const Ray& ray, unsigned int remaining) const
 {
     auto xs = intersect(ray);
     auto hit = xs.hit();
     if (hit == nullptr)
         return Color(0, 0, 0);
     auto comps = hit->prepare(ray);
-    return comps.shade(*this);
+    return comps.shade(*this, remaining);
 }
 
 bool World::isShadowed(const Tuple& point) const

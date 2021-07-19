@@ -284,22 +284,23 @@ void worldWithPatterns()
 {
 	auto floor = Plane();
 	auto fPattern = CheckersPattern(Color(1, 1, 1), Color(0, 0, 0));
-	fPattern.transform = rotationY(pi / 4) * scaling(2, 2, 2);
+	fPattern.transform = translation(0, -0.1, 0) * rotationY(pi / 4) * scaling(2, 2, 2);
 	floor.material = Material();
-	floor.material.color = Color(1, 0.9f, 0.9f);
 	floor.material.specular = 0;
 	floor.material.pattern = &fPattern;
 
 	auto leftWall = Plane();
 	auto lwPattern = RingPattern(Color(1, 1, 1), Color(1, 0, 0));
 	//lwPattern.transform = rotationX(pi / 2) * translation(0, 0, 5);
-	leftWall.transform = translation(0, 0, 5) * rotationY(-pi / 4) * rotationX(pi / 2);
+	leftWall.transform = translation(0, 0, 4.9) * rotationY(-pi / 4) * rotationX(pi / 2);
 	leftWall.material = floor.material;
 	leftWall.material.pattern = &lwPattern;
 
 	auto rightWall = Plane();
-	rightWall.transform = translation(0, 0, 5) * rotationY(pi / 4) * rotationX(pi / 2);
+	rightWall.transform = translation(0, 0, 4.9) * rotationY(pi / 4) * rotationX(pi / 2);
 	rightWall.material = floor.material;
+	rightWall.material.color = Color(0.7f);
+	rightWall.material.pattern = nullptr;
 
 	auto middle = Sphere();
 	auto sPattern = StripePattern(Color(1, 0.5, 0), Color(1, 0.3, 0));

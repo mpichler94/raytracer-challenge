@@ -18,20 +18,12 @@ struct Computations
 	Tuple normal;
 	bool inside;
 	Tuple overPoint;
+	Tuple reflectv;
 
-	Computations(float t, const Shape* object, const Tuple& point, const Tuple& eyev, const Tuple& normal)
-		: t(t), object(object), point(point), eyev(eyev), normal(normal), inside(false)
-	{
-		if (dot(normal, eyev) < 0.f)
-		{
-			inside = true;
-			this->normal = -normal;
-		}
+	Computations(float t, const Shape* object, const Ray& ray, const Tuple& normal);
 
-		overPoint = point + this->normal * 1e-1f;
-	}
-
-	Color shade(const World& w) const;
+	Color shade(const World& w, unsigned int remaining) const;
+	Color reflectedColor(const World& w, unsigned int remaining) const;
 };
 
 class Intersection

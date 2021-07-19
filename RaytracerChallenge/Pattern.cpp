@@ -5,7 +5,6 @@
 Pattern::Pattern()
 	: transform(Matrix<4, 4>::identity())
 {
-
 }
 
 Color Pattern::colorAtShape(const Shape& shape, const Tuple& point) const

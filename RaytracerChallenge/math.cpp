@@ -16,6 +16,11 @@ Matrix<4, 4> scaling(float x, float y, float z)
 	return Matrix<4, 4>(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1);
 }
 
+Matrix<4, 4> scaling(float s)
+{
+	return Matrix<4, 4>(s, 0, 0, 0, 0, s, 0, 0, 0, 0, s, 0, 0, 0, 0, 1);
+}
+
 Matrix<4, 4> rotationX(float r)
 {
 	return Matrix<4, 4>(1, 0, 0, 0, 0, cosf(r), -sinf(r), 0, 0, sinf(r), cosf(r), 0, 0, 0, 0, 1);

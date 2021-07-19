@@ -30,7 +30,7 @@ public:
 	Shape* getObject(size_t index);
 	Intersections intersect(const Ray& ray) const;
 
-	Color colorAt(const Ray& r) const;
+	Color colorAt(const Ray& r, unsigned int remaining) const;
 
 	bool isShadowed(const Tuple& point) const;
 };

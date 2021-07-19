@@ -108,7 +108,7 @@ namespace Tests
 			auto i = Intersection(4, shape);
 
 			auto comps = i.prepare(r);
-			auto c = comps.shade(w);
+			auto c = comps.shade(w, 5);
 
 			Assert::AreEqual(Color(0.38066, 0.47583, 0.2855), c);
 		}
@@ -122,9 +122,9 @@ namespace Tests
 			auto i = Intersection(0.5, shape);
 
 			auto comps = i.prepare(r);
-			auto c = comps.shade(w);
+			auto c = comps.shade(w, 5);
 
-			Assert::AreEqual(Color(0.90498, 0.90498, 0.90498), c);
+			Assert::AreEqual(Color(0.90495, 0.90495, 0.90495), c);
 		}
 
 		TEST_METHOD(TestColorWhenMiss)
@@ -132,7 +132,7 @@ namespace Tests
 			auto w = World::Default();
 			auto r = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 1, 0));
 
-			auto c = w.colorAt(r);
+			auto c = w.colorAt(r, 5);
 
 			Assert::AreEqual(Color(0, 0, 0), c);
 		}
@@ -142,7 +142,7 @@ namespace Tests
 			auto w = World::Default();
 			auto r = Ray(Tuple::point(0, 0, -5), Tuple::vector(0, 0, 1));
 
-			auto c = w.colorAt(r);
+			auto c = w.colorAt(r, 5);
 
 			Assert::AreEqual(Color(0.38066, 0.47583, 0.2855), c);
 		}
@@ -156,7 +156,7 @@ namespace Tests
 			inner->material.ambient = 1;
 			auto r = Ray(Tuple::point(0, 0, 0.75), Tuple::vector(0, 0, -1));
 
-			auto c = w.colorAt(r);
+			auto c = w.colorAt(r, 5);
 
 			Assert::AreEqual(inner->material.color, c);
 		}
