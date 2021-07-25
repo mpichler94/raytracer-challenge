@@ -9,7 +9,7 @@
 #include "shape.h"
 
 Material::Material()
-	: ambient(0.1f), diffuse(0.9f), specular(0.9f), shininess(200.f), reflective(0.f), color(1, 1, 1), pattern(nullptr)
+	: ambient(0.1f), diffuse(0.9f), specular(0.9f), shininess(200.f), reflective(0.f), transparency(0.f), refractiveIndex(1.f), color(1, 1, 1), pattern(nullptr)
 {
 }
 

@@ -16,6 +16,7 @@ public:
 
 public:
 	Shape();
+	Shape(const Shape& other) = default;
 
 	virtual Intersections intersect(const Ray& r) const final;
 	virtual Tuple normal(const Tuple& point) const final;
@@ -40,12 +41,15 @@ private:
 
 public:
 	Sphere();
+	Sphere(const Sphere& other) = default;
+
+	static Sphere glass();
 
 	virtual bool operator==(const Shape& rhs) const override;
 
 	virtual std::wstring toString() const;
 
-	//friend bool operator==(const Sphere& lhs, const Sphere& rhs);
+	Sphere& operator=(const Sphere& other);
 
 	friend std::wstring ToString(const Sphere& s);
 

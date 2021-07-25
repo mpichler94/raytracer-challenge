@@ -15,8 +15,11 @@ public:
 	float specular;
 	float shininess;
 	float reflective;
+	float transparency;
+	float refractiveIndex;
 	Color color;
 	Pattern* pattern;
+
 
 public:
 	Material();

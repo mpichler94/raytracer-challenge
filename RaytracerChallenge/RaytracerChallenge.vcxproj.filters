@@ -19,6 +19,12 @@
     <Filter Include="Header Files\math">
       <UniqueIdentifier>{658b722b-bf9a-43f0-850a-dfefe0678b57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\shapes">
+      <UniqueIdentifier>{3fb6806b-9a52-4944-929c-89d2126142c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\shapes">
+      <UniqueIdentifier>{8ed75f9e-aecd-49cf-91d3-074d2245a189}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="canvas.h">
@@ -39,16 +45,10 @@
     <ClInclude Include="ray.h">
       <Filter>Header Files\math</Filter>
     </ClInclude>
-    <ClInclude Include="shape.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="intersection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="light.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="material.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="world.h">
@@ -57,8 +57,14 @@
     <ClInclude Include="camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="shape.h">
+      <Filter>Header Files\shapes</Filter>
+    </ClInclude>
     <ClInclude Include="pattern.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="material.h">
+      <Filter>Header Files\shapes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -83,16 +89,10 @@
     <ClCompile Include="ray.cpp">
       <Filter>Source Files\math</Filter>
     </ClCompile>
-    <ClCompile Include="shape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="intersection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="light.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="material.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="world.cpp">
@@ -101,8 +101,14 @@
     <ClCompile Include="camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="material.cpp">
+      <Filter>Source Files\shapes</Filter>
+    </ClCompile>
     <ClCompile Include="Pattern.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="shape.cpp">
+      <Filter>Source Files\shapes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

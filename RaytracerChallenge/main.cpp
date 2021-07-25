@@ -279,7 +279,7 @@ void worldWithPlanes()
 	ShellExecute(NULL, NULL, L"canvas.ppm", NULL, NULL, SW_SHOW);
 }
 
-// chapter 10
+// chapter 10 / 11
 void worldWithPatterns()
 {
 	auto floor = Plane();
@@ -299,7 +299,9 @@ void worldWithPatterns()
 	auto rightWall = Plane();
 	rightWall.transform = translation(0, 0, 4.9) * rotationY(pi / 4) * rotationX(pi / 2);
 	rightWall.material = floor.material;
-	rightWall.material.color = Color(0.7f);
+	rightWall.material.ambient = 0.f;
+	rightWall.material.diffuse = 0.f;
+	rightWall.material.reflective = 0.8f;
 	rightWall.material.pattern = nullptr;
 
 	auto middle = Sphere();
@@ -344,6 +346,75 @@ void worldWithPatterns()
 	ShellExecute(NULL, NULL, L"canvas.ppm", NULL, NULL, SW_SHOW);
 }
 
+// 11
+void worldRefraction()
+{
+	auto floor = Plane();
+	auto fPattern = CheckersPattern(Color(.35), Color(.65));
+	fPattern.transform = rotationY(pi / 4);
+	floor.material = Material();
+	floor.material.reflective = 0.4;
+	floor.material.specular = 0;
+	floor.material.pattern = &fPattern;
+
+	auto redMaterial = Material();
+	redMaterial.color = Color(1, 0.3, 0.2);
+	redMaterial.specular = .4;
+	redMaterial.shininess = 5;
+
+	auto redSphere1 = Sphere();
+	redSphere1.transform = translation(6, 1, 4);
+	redSphere1.material = redMaterial;
+
+	auto redSphere2 = Sphere();
+	redSphere2.transform = translation(2, 1, 3);
+	redSphere2.material = redMaterial;
+
+	auto redSphere3 = Sphere();
+	redSphere3.transform = translation(-1, 1, 2);
+	redSphere3.material = redMaterial;
+
+	auto blueGlassSphere = Sphere();
+	blueGlassSphere.material.color = Color(0, 0, 0.2);
+	blueGlassSphere.material.ambient = 0;
+	blueGlassSphere.material.diffuse = 0.2;
+	blueGlassSphere.material.specular = 0.9;
+	blueGlassSphere.material.shininess = 300;
+	blueGlassSphere.material.reflective = 0.9;
+	blueGlassSphere.material.transparency = 0.9;
+	blueGlassSphere.material.refractiveIndex = 1.5;
+	blueGlassSphere.transform = scaling(0.7) * translation(0.6, 0.7, -0.6);
+
+	auto greenGlassSphere = Sphere();
+	greenGlassSphere.material.color = Color(0, 0.2, 0);
+	greenGlassSphere.material.ambient = 0;
+	greenGlassSphere.material.diffuse = 0.2;
+	greenGlassSphere.material.specular = 0.9;
+	greenGlassSphere.material.shininess = 300;
+	greenGlassSphere.material.reflective = 0.9;
+	greenGlassSphere.material.transparency = 0.9;
+	greenGlassSphere.material.refractiveIndex = 1.5;
+	greenGlassSphere.transform = scaling(0.5) * translation(-0.7, 0.5, -0.8);
+
+	auto world = World();
+	world.light = PointLight(Tuple::point(-4.9, 4.9, -1), Color(1));
+	world.addObject(&floor);
+	world.addObject(&redSphere1);
+	world.addObject(&redSphere2);
+	world.addObject(&redSphere3);
+	world.addObject(&blueGlassSphere);
+	world.addObject(&greenGlassSphere);
+
+	auto camera = Camera(1920, 1080, pi / 3);
+	//auto camera = Camera(800, 400, pi / 3);
+	camera.setTransform(viewTransform(Tuple::point(0, 1.5, -5), Tuple::point(0, 1, 0), Tuple::point(0, 1, 0)));
+
+	auto canvas = camera.render(world);
+	canvas.savePPM("canvas.ppm");
+
+	ShellExecute(NULL, NULL, L"canvas.ppm", NULL, NULL, SW_SHOW);
+}
+
 int main(char* ars[])
 {
 	//projectileLaucher();
@@ -352,6 +423,7 @@ int main(char* ars[])
 	//rayCaster();
 	//simpleWorld();
 	//orldWithPlanes();
-	worldWithPatterns();
+	//worldWithPatterns();
+	worldRefraction();
 
 }

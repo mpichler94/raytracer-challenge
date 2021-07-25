@@ -17,6 +17,14 @@ Sphere::Sphere()
 {
 }
 
+Sphere Sphere::glass()
+{
+    Sphere s;
+    s.material.transparency = 1.f;
+    s.material.refractiveIndex = 1.5f;
+    return s;
+}
+
 Intersections Shape::intersect(const Ray& ray) const
 {
     auto r = ray.transform(inverse(transform));
